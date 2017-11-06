@@ -1,0 +1,21 @@
+{
+    "name": "asdf",
+    "description": "asdf",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "a team",
+            "email": "devteam.itnbo@dyninno.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["."]
+    },
+    "require": {
+        "hhvm/hhvm-autoload": ">=1.5.0",
+        "hhvm/type-assert": "^3.0",
+        "phpunit/phpunit": ">=5.4.0",
+        "phpunit/php-invoker": ">=1.1.0",
+        "91carriage/phpunit-hhi": "5.7.1"
+    }
+}
