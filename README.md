@@ -1,10 +1,20 @@
 # hhvm curl stress test
 
-How:
+## Running:
 
-1. point `$SELF_URL` (src/burn.hh:3) to itself (should be accessible via web).
-2. `hhvm src/burn.hh 1000 50` -- the first argument controls the number of attempts, while the second one determines the number of parallel requests. Particulars may vary.
+`hhvm src/burn.hh http://127.0.0.1:8080/debug/tst/burn/src/burn.hh http://localhost 100 100`
 
-What:
+The first argument should be the URL of burn.hh accessible through http.
+The second argument is an arbitrary webpage to be retrieved by the sevice (here it's just the default Apache page).
+The third argument controls the total number of attempts.
+The fourth argument control the total number of parallel requests.
 
-Few seconds later hhvm service is dead?
+Particulars needed to cause the crash may vary.
+
+## Effects:
+
+After a few attempts hhvm serving requests through proxygen:
+
+- either becomes unresponsive and hangs with 100% cpu usage
+- or segfaults
+

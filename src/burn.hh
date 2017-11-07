@@ -1,8 +1,5 @@
 <?hh
 
-$SELF_URL = 'http://127.0.0.1:8080/debug/tst/burn/src/'.$argv[0];
-$DUMMY_URL = 'http://localhost';
-
 async function send(string $to): Awaitable<string>
 {
     $curl = curl_init();
@@ -16,10 +13,19 @@ async function send(string $to): Awaitable<string>
     return $result;
 }
 
-if (isset($argv[1]) && isset($argv[2])) {
+if (isset($argv[1]) && isset($argv[2] && isset($argv[3]) && isset($argv[4]))) {
+    $endpoint = $argv[1];
+    $remoteService = $argv[2];
+    $attempts = $argv[3];
+    $threads = $argv[4];
+
     array_map(
-        $_ ==> \HH\Asio\join(\HH\Asio\v(array_map($_ ==> send($SELF_URL), range(1, intval($argv[2]))))),
-        range(1, intval($argv[1])));
-} else {
-    \HH\Asio\join(send($DUMMY_URL));
+        $_ ==>
+            \HH\Asio\join(\HH\Asio\v(
+                array_map(
+                    $_ ==> send($endpoint.'?'.urlencode($remoteService)),
+                    range(1, intval($threads))))),
+        range(1, intval($attempts)));
+} elseif (isset($_SERVER['QUERY_STRING'])) {
+    \HH\Asio\join(send(urldecode($_SERVER['QUERY_STRING'])));
 }
