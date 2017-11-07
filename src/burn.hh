@@ -3,7 +3,6 @@
 require_once __DIR__.'/../vendor/hh_autoload.php';
 
 $SELF_URL = 'http://localhost/burn/src/'.$argv[0];
-// $SELF_URL = 'http://web3.dev.itn-bo.hhvm.dyninno.net:8080/eshchekochikhin/public_html/burn/src/'.$argv[0];
 $DUMMY_URL = 'http://localhost';
 
 function send(string $to): void
