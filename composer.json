@@ -1,6 +1,6 @@
 {
-    "name": "asdf",
-    "description": "asdf",
+    "name": "hhvm async curl stress test",
+    "description": "causes hhvm crashes (with varying symptoms)",
     "license": "proprietary",
     "authors": [
         {
@@ -10,12 +10,5 @@
     ],
     "autoload": {
         "classmap": ["."]
-    },
-    "require": {
-        "hhvm/hhvm-autoload": ">=1.5.0",
-        "hhvm/type-assert": "^3.0",
-        "phpunit/phpunit": ">=5.4.0",
-        "phpunit/php-invoker": ">=1.1.0",
-        "91carriage/phpunit-hhi": "5.7.1"
     }
 }
