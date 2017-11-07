@@ -1,0 +1,48 @@
+version: '2'
+services:
+
+  server:
+    container_name: server        
+    build: .
+    expose:
+      - "8080"
+    networks:
+      dockernet:
+        ipv4_address: 10.1.0.2
+
+  dummy:
+    image: nginx
+    container_name: dummy-nginx
+    ports:
+     - "8080:80"
+    volumes:
+      - ./README.md:/usr/share/nginx/html/index.html
+    networks:
+      dockernet:
+        ipv4_address: 10.1.0.3
+
+  client:
+    container_name: client
+    build: .
+    links:
+      - server
+      - dummy
+    entrypoint: >
+      /usr/bin/hhvm
+      -d hhvm.hack.lang.look_for_typechecker=0
+      /var/www/burn.hh
+      http://server:8080/burn.hh
+      http://10.1.0.3/index.html
+      1000
+      100
+    networks:
+      dockernet:
+        ipv4_address: 10.1.0.10
+
+networks:
+  dockernet:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.1.0.0/16
+         gateway: 10.1.0.1
