@@ -11,6 +11,10 @@ The fourth argument control the total number of parallel requests.
 
 Particulars needed to cause the crash may vary.
 
+## Alternative runner:
+
+`./run.sh` — build and run test in the isolated docker containers. Requires docker-compose.
+
 ## Effects:
 
 After a few attempts hhvm serving requests through proxygen:
