@@ -1,11 +1,9 @@
-# burn
-hhvm curl crash test
+# hhvm curl stress test
 
 How:
 
-1. `composer install`
-2. point `$SELF_URL` (in src/burn.hh) to itself (should be accessible via web)
-3. `./run10x1000.sh`
+1. point `$SELF_URL` (src/burn.hh:3) to itself (should be accessible via web).
+2. `hhvm src/burn.hh 1000 50` -- the first argument controls the number of attempts, while the second one determines the number of parallel requests. Particulars may vary.
 
 What:
 
