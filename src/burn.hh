@@ -15,7 +15,7 @@ async function send(string $to): Awaitable<string>
     return $result;
 }
 
-function sync_send(string $to): string
+async function sync_send(string $to): Awaitable<string>
 {
     print('Initiating request to [' . $to . ']...'."\n");
 
@@ -48,5 +48,5 @@ if (isset($argv[1]) && isset($argv[2]) && isset($argv[3]) && isset($argv[4])) {
         range(1, $attempts));
 // remote service that retrieves the remote resource specified by the URL in the QUERY_STRING
 } elseif (isset($_SERVER['QUERY_STRING'])) {
-    sync_send(urldecode($_SERVER['QUERY_STRING']));
+    \HH\Asio\join(sync_send(urldecode($_SERVER['QUERY_STRING'])));
 }
